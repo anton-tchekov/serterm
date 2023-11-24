@@ -173,7 +173,13 @@ int main(int argc, char **argv)
 
 	for(;;)
 	{
-		n = read(STDIN_FILENO, buf, sizeof(buf));
+		if(!fgets(buf, sizeof(buf), stdin))
+		{
+			fprintf(stderr, "Error reading!\n");
+			continue;
+		}
+
+		n = strlen(buf);
 		write(fd, buf, n);
 	}
 
